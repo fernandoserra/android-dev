@@ -69,14 +69,8 @@ public class BagFragment extends Fragment {
 
         share_card_id     =SharedPrefManager.getInstance(getContext()).getCardID();
         share_customer_id =SharedPrefManager.getInstance(getContext()).getCustomeID();
-
-        Log.i(TAG,"getCardID():    " + share_card_id);
-        Log.i(TAG,"getCustomeID(): " + share_customer_id);
-
-
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_cart_product);
         ApiInterface apiInterface =  ApiClient.getClient(Constants.ROOT_URL_CART).create(ApiInterface.class);
-        //Call<CartListModel> call = apiInterface.listCart("ff41f6f0-b9f5-11e9-886f-2191fc1fcd5e","11223950");
         Call<CartListModel> call = apiInterface.listCart(share_card_id,share_customer_id);
         call.enqueue(new Callback<CartListModel>() {
             @Override

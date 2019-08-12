@@ -33,12 +33,10 @@ public class SharedPrefManager {
         return true;
     }
 
-
     public String getCardID(){
         SharedPreferences  sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
         return sharedPreferences.getString(CART_ID,null);
     }
-
 
     public String getCustomeID(){
         SharedPreferences  sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);

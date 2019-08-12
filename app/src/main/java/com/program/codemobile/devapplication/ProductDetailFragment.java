@@ -90,7 +90,6 @@ public class ProductDetailFragment extends Fragment {
             public void onResponse(Call<MyPojo> call, Response<MyPojo> response) {
                 Log.i(TAG,"Response: " + response.body().toString() );
                 MyPojo myPojo =response.body();
-                Log.i(TAG,"myPojo.getName() : " + myPojo.getName() );
                 name.setText(myPojo.getName());
                 Log.i(TAG,"myPojo.getName() : " + myPojo.getImages().length );
                 Log.i(TAG,"myPojo.getAttributes() : " + myPojo.getAttributes().length);
@@ -114,15 +113,8 @@ public class ProductDetailFragment extends Fragment {
 
     private void addBagApp(final String uniqueID, final String sku, final String namePro, final String pricePro) {
         Log.i(TAG,"Ejecutando Metodo addBagApp() " + uniqueID);
-        Log.i(TAG,"pricePro " + pricePro);
-
         final String share_card_id     =SharedPrefManager.getInstance(getContext()).getCardID();
         final String share_customer_id =SharedPrefManager.getInstance(getContext()).getCustomeID();
-
-        Log.i(TAG,"SharedPrefManager.getInstance(getContext()).getCardID(): " + share_card_id);
-        Log.i(TAG,"SharedPrefManager.getInstance(getContext()).getCustomeID(): " + share_customer_id);
-
-
         if( (share_card_id==null) || (share_customer_id==null)){
             Log.i(TAG,"No tiene bolsa creada");
 
@@ -136,7 +128,6 @@ public class ProductDetailFragment extends Fragment {
                     if(response.code()!=200){
                         Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
                     }else{
-
                         Log.i(TAG,"Response body(): " +  response.code());
                         Log.i(TAG,"Response body(): " +  response.body());
                         Log.i(TAG,"cartNewModel.toString(): " +  cartNewModel.toString());
@@ -144,7 +135,6 @@ public class ProductDetailFragment extends Fragment {
                         Log.i(TAG,"cartNewModel.getCart_id(): " +  cartNewModel.getCart_id());
                         Log.i(TAG,"cartNewModel.getCustomer_id(): " +  cartNewModel.getCustomer_id());
                         SharedPrefManager.getInstance(getContext()).storeCard(cartNewModel.getCart_id(),cartNewModel.getCustomer_id());
-
                         insertProduct(cartNewModel.getCart_id(), cartNewModel.getCustomer_id(), uniqueID ,sku ,namePro,pricePro);
                     }
 
@@ -158,7 +148,6 @@ public class ProductDetailFragment extends Fragment {
         }else{
             Log.i(TAG,"Si Tiene una bolsa creada");
             insertProduct(share_card_id, share_customer_id, uniqueID,sku,namePro,pricePro);
-
         }
     }
 
